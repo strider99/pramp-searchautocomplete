@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Autocomplete</title>
+    <!-- Included some basic styling, change at will -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/prampcontent/3ea04cbd0f61a798e96afbe5d31ec2f9/raw/e879e32222b543b29a168daa089e2f9f28cf9eb2/autocomplete.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+<form class="search-form">
+    <input type="text" class="search-input" placeholder="Start typing a movie title...">
+    <ul class="results"></ul>
+</form>
+<!-- Helper code to provide a search API for mock data -->
+<script src="https://cdn.rawgit.com/prampcontent/180077452f9279073cab1035f60d30cf/raw/9cbf891a80bad9ad09c6261ef9578a65502922cc/search_helper.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.min.js"></script>
+<script>
+$(document).ready(function () {
+
+  var $searchInput = $('.search-input');
+  $searchInput.on('change keyup', _.debounce(searchMovie, 300))
+
+  function searchMovie(searchValue){
+    var searchValue = $($searchInput.val());
+    searchData(searchValue)
+      .then(res => {
+        console.log(res);
+      })
+  }
+})
+
+</script>
+</body>
+</html>
